@@ -2,48 +2,55 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport"
-        content="width=device-width, initial-scale=1, viewport-fit=cover">
-
-  <meta name="theme-color" content="#fffaf2">
-
-  <title>Mustafa & Tina - Mumbai RSVP</title>
-
-  <style>
-    html, body {
-      margin: 0;
-      width: 100%;
-      height: 100%;
-      background: #fffaf2;
-      overflow: hidden;
-    }
-
-.app-frame {
-  position: fixed;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  border: 0;
-  background: #fffaf2;
-}
-
-@media (max-width: 600px) {
-  .app-frame {
-    top: 16px;
-    height: calc(100% - 32px);
-  }
-}
-  </style>
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#14382f">
+  <title>Mustafa &amp; Tina | Mumbai RSVP</title>
+  <meta name="description" content="RSVP for Mustafa and Tina's Mumbai pre-wedding celebration.">
+  <link rel="stylesheet" href="styles.css">
 </head>
-
 <body>
+  <main>
+    <section id="landing" class="landing">
+      <img class="invitation" src="mumbai-invitation.png" alt="Mustafa and Tina Mumbai pre-wedding celebration invitation">
+      <button id="beginButton" class="primary overlay-button" type="button">Begin RSVP</button>
+    </section>
 
-  <iframe
-    class="app-frame"
-    src="https://script.google.com/macros/s/AKfycbwLoLn7U4JnLKHEbwJgfbeCAQewNEAlYnEMaNaU7wOkfLD9V46tz_ULVOEkDIFNtvJgAg/exec"
-    title="Mustafa & Tina Mumbai RSVP"
-    referrerpolicy="strict-origin-when-cross-origin">
-  </iframe>
+    <section id="rsvp" class="panel hidden" aria-live="polite">
+      <button id="backButton" class="back" type="button">&#8592; Invitation</button>
+      <header>
+        <p class="eyebrow">Mustafa &amp; Tina</p>
+        <h1>Mumbai RSVP</h1>
+      </header>
 
+      <div id="lookupView">
+        <label for="inviteCode">Last four digits of the mobile number associated with your invitation</label>
+        <div class="lookup-row">
+          <input id="inviteCode" inputmode="numeric" autocomplete="one-time-code" maxlength="4" pattern="[0-9]{4}" placeholder="0000">
+          <button id="lookupButton" class="primary" type="button">Continue</button>
+        </div>
+      </div>
+
+      <form id="rsvpForm" class="hidden">
+        <h2 id="greeting"></h2>
+        <p id="allocation" class="muted"></p>
+        <fieldset>
+          <legend>Will you attend?</legend>
+          <label class="choice"><input type="radio" name="attendance" value="Accept" required> Joyfully accept</label>
+          <label class="choice"><input type="radio" name="attendance" value="Decline" required> Regretfully decline</label>
+        </fieldset>
+        <div id="attendingFields" class="hidden">
+          <label for="attendeeCount">Number attending</label>
+          <select id="attendeeCount"></select>
+          <div id="guestFields"></div>
+        </div>
+        <label for="message">Message for Mustafa &amp; Tina <span class="muted">(optional)</span></label>
+        <textarea id="message" rows="4" maxlength="1000"></textarea>
+        <button id="submitButton" class="primary full" type="submit">Send RSVP</button>
+      </form>
+      <p id="status" class="status" role="status"></p>
+    </section>
+  </main>
+  <script src="config.js"></script>
+  <script src="app.js"></script>
 </body>
 </html>
