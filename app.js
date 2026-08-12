@@ -95,7 +95,8 @@
       for (let attempt=0; attempt<4 && !confirmed; attempt++) {
         await new Promise((r) => setTimeout(r, 900 + attempt * 500));
         const check = await jsonp({ action:"lookup", code:state.code, _:Date.now() });
-        confirmed = Boolean(check.ok && check.guest.existingRsvp && check.guest.existingRsvp.submissionId === payload.submissionId);
+        const saved = check.ok && check.guest.existingRsvp;
+        confirmed = Boolean(saved && saved.attendance === payload.attendance && (saved.message || "") === payload.message);
       }
       if (!confirmed) throw new Error("We could not confirm the save. Please try once more.");
       $("rsvpForm").innerHTML = `<h2>Thank you</h2><p class="status">Your RSVP has been received. Mustafa &amp; Tina and the Shikora Family look forward to celebrating with you.</p>`;
